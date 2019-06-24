@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:8080/jblog/api";
+const baseURL = "http://localhost:8080/api";
 
 export const URLs = {
     blog: {
