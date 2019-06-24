@@ -5,6 +5,7 @@ import Initialize from './components/Initialize'
 import Login from './components/Login'
 import Admin from './components/Admin'
 import Post from './components/Post'
+import PostEdit from './components/PostEdit'
 import { get } from './utils/APIUtil'
 import { URLs } from './context/Consts'
 
@@ -38,6 +39,12 @@ const router = new Router({
       path: '/posts/:id',
       name: 'posts',
       component: Post
+    },
+    {
+      path: '/posts/:id/edit',
+      name: "postEdit",
+      component: PostEdit,
+      meta: { authRequired: true }
     }
     //{
     //path: '/about',

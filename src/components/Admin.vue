@@ -60,12 +60,24 @@
       </div>
       <el-table :data="postList" border>
         <el-table-column label="操作" width="80px">
-          <el-button size="mini" type="success" style="padding: 5px;">
-            <i class="el-icon-edit"></i>
-          </el-button>
-          <el-button size="mini" type="danger" style="padding: 5px; margin-left: 5px">
-            <i class="el-icon-delete"></i>
-          </el-button>
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="success"
+              style="padding: 5px;"
+              @click="editPost(scope.row.id)"
+            >
+              <i class="el-icon-edit"></i>
+            </el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              style="padding: 5px; margin-left: 5px"
+              @click="deletePost(scope.row.id)"
+            >
+              <i class="el-icon-delete"></i>
+            </el-button>
+          </template>
         </el-table-column>
         <el-table-column label="标题" prop="title"></el-table-column>
       </el-table>
@@ -74,6 +86,8 @@
         background
         layout="prev, pager, next"
         :total="blog.postsCount"
+        :page-count="5"
+        :current-page.sync="postCurrentPage"
         @current-change="changePostListPage"
       ></el-pagination>
     </el-row>
@@ -83,9 +97,16 @@
       </div>
       <el-table :data="commentList" border>
         <el-table-column label="操作" width="50px">
-          <el-button size="mini" type="danger" style="padding:5px">
-            <i class="el-icon-delete"></i>
-          </el-button>
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="danger"
+              style="padding:5px"
+              @click="deleteComment(scope.row.id)"
+            >
+              <i class="el-icon-delete"></i>
+            </el-button>
+          </template>
         </el-table-column>
         <el-table-column label="评论" prop="comment"></el-table-column>
       </el-table>
@@ -94,6 +115,8 @@
         background
         layout="prev, pager, next"
         :total="blog.commentsCount"
+        :page-count="5"
+        :current-page.sync="commentCurrentPage"
         @current-change="changeCommentListPage"
       ></el-pagination>
     </el-row>
@@ -139,6 +162,33 @@ export default {
         error => this.$message.error(msg(error))
       );
     },
+    editPost: function(id) {
+      this.$router.push({ name: "postEdit", params: { id } });
+    },
+    deletePost: function(id) {
+      this.$confirm("是否删除此文章？", "确认", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          post(
+            URLs.post.base + "/" + id + "/delete",
+            null,
+            () => {
+              this.$message.success("文章删除成功");
+              this.postCurrentPage = 1;
+              this.getPostList(1, 10);
+              this.getCommentList(1, 10);
+              this.SET_BLOG_INFO();
+            },
+            error => this.$message.error(msg(error))
+          );
+        })
+        .catch(() => {
+          this.$message.info("删除已取消");
+        });
+    },
     getBlogInfo: function() {
       get(URLs.blog.base, null, response => (this.blog = response.data));
     },
@@ -162,6 +212,29 @@ export default {
     changeCommentListPage: function(pageNum) {
       this.getCommentList(pageNum, 10);
     },
+    deleteComment: function(id) {
+      this.$confirm("是否删除此评论？", "确认", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          post(
+            URLs.comment.base + "/" + id + "/delete",
+            null,
+            () => {
+              this.$message.success("评论删除成功");
+              this.commentCurrentPage = 1;
+              this.getCommentList(1, 10);
+              this.SET_BLOG_INFO();
+            },
+            error => this.$message.error(msg(error))
+          );
+        })
+        .catch(() => {
+          this.$message.info("删除已取消");
+        });
+    },
     ...mapActions([Types.SET_BLOG_INFO])
   },
   data() {
@@ -172,7 +245,9 @@ export default {
       },
       blog: {},
       postList: [],
-      commentList: []
+      commentList: [],
+      postCurrentPage: 1,
+      commentCurrentPage: 1
     };
   },
   mounted() {
