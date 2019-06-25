@@ -4,6 +4,7 @@ export const URLs = {
     blog: {
         base: baseURL + "/blog",
         create: baseURL + "/blog/create",
+        update: baseURL + "/blog/update",
         login: baseURL + "/blog/login",
         auth: baseURL + "/blog/auth"
     },

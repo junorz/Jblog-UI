@@ -48,7 +48,7 @@
               <el-switch v-model="blog.commentable" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary">更新</el-button>
+              <el-button type="primary" @click="updateBlogInfo()">更新</el-button>
             </el-form-item>
           </el-form>
         </el-card>
@@ -158,6 +158,24 @@ export default {
           this.$message.success("新文章已登录");
           this.post.title = "";
           this.post.content = "";
+        },
+        error => this.$message.error(msg(error))
+      );
+    },
+    updateBlogInfo: function() {
+      let blogInfo = this.blog;
+      if (!this.blog.password) {
+        blogInfo.password = "";
+        blogInfo.confirm = "";
+      }
+      post(
+        URLs.blog.update,
+        blogInfo,
+        response => {
+          console.log(response.data);
+          this.$message.success("更新博客情报成功");
+          this.blog = response.data;
+          this.SET_BLOG_INFO();
         },
         error => this.$message.error(msg(error))
       );
