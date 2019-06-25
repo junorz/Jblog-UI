@@ -17,12 +17,11 @@
   margin: 0;
   outline: 0;
   padding: 0 30px;
-  font-size: 0.95rem;
 }
 
 #subtitle {
   word-spacing: 2px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: lightslategray;
 }
 

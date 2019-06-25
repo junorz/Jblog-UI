@@ -56,7 +56,6 @@
 
 <style scoped>
 h3 {
-  font-size: 1.1rem;
   font-weight: 500;
   color: #58666e;
 }
@@ -72,7 +71,8 @@ div {
 }
 .postContent {
   color: #98a6ad;
-  font-size: 0.85rem;
+  font-size: 1rem;
+  font-weight: 300;
 }
 .commentArea {
   margin-top: 20px;
@@ -90,10 +90,12 @@ div {
 }
 .commentAuthor {
   font-size: 0.9rem;
+  font-weight: 500;
 }
 .commentContent {
   color: #98a6ad;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 300;
 }
 </style>
 
