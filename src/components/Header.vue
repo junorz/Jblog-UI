@@ -28,6 +28,7 @@
 a {
   color: #58666e;
   text-decoration-line: none;
+  font-weight: 500;
 }
 </style>
 

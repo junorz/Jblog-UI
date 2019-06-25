@@ -69,8 +69,7 @@ h3 {
   color: #58666e;
   margin-top: 10px;
   padding: 0 5px;
-  font-size: 1rem;
-  font-weight: 300;
+  font-size: 0.9rem;
 }
 
 .el-pagination {

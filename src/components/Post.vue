@@ -69,10 +69,11 @@ div {
   font-size: 0.8rem;
   color: #98a6ad;
 }
+.el-card {
+  font-size: 0.9rem;
+}
 .postContent {
   color: #98a6ad;
-  font-size: 1rem;
-  font-weight: 300;
 }
 .commentArea {
   margin-top: 20px;
@@ -95,7 +96,6 @@ div {
 .commentContent {
   color: #98a6ad;
   font-size: 0.9rem;
-  font-weight: 300;
 }
 </style>
 
