@@ -54,6 +54,7 @@
 h3 {
   font-weight: 500;
   cursor: pointer;
+  font-size: 1rem;
 }
 
 .postContent {
@@ -69,7 +70,7 @@ h3 {
   color: #58666e;
   margin-top: 10px;
   padding: 0 5px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .el-pagination {

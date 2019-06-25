@@ -58,6 +58,7 @@
 h3 {
   font-weight: 500;
   color: #58666e;
+  font-size: 1rem;
 }
 div {
   color: #58666e;
